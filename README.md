@@ -23,9 +23,11 @@ const fetchInfo = async ({ getState, dispatch }) => {
 };
 ```
 
-现在，我们去执行两次 a 函数，第一次的 fetchInfo 获取到了 redux 的数据后，拿到该数据后去请求后台，但数据还没来，所以它会执行第二次的 a 函数，同理。这会让这两次 fetchInfo 拿到的 redux 数据一样。但是我们想第二次 fetchInfo 拿到的数据是第一次 fetchInfo 执行完后（当前最新）的数据，并行请求是很难做到的，因此，才有了这个串行请求的中间件。
+现在，我们去执行两次 fetchInfo 函数，第一次的 fetchInfo 获取到了 redux 的数据后，拿到该数据后去请求后台，但数据还没来，所以它会执行第二次的 fetchInfo 函数，同理。这会让这两次 fetchInfo 拿到的 redux 数据一样。但是我们想第二次 fetchInfo 拿到的数据是第一次 fetchInfo 执行完后（当前最新）的数据，并行请求是很难做到的，因此，才有了这个串行请求的中间件。
 
 ## 如何使用
+
+下载 createSerialMiddleware.js 文件到项目中，在创建store时，添加该模块到中间件列表中。
 
 一般的 dispatch 为 `dispatch({ type: string, data: any })`
 
